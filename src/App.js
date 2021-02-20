@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import UserItem from "./components/user_item.js";
+import Pagination from "./components/pagination";
+import Search from "./components/search";
+
+import { users } from "./store/actions/users";
+import { sortbyname } from "./store/actions/sortbyname";
+import { sortbysurname } from "./store/actions/sortbysurname";
 
 function App() {
+  const dispatch = useDispatch();
+  const usersList = useSelector((state) => state.users);
+
+  useEffect(() => dispatch(users(1)), []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      <Search />
+
+      {usersList.length ? <table>
+        <thead>
+          <tr>
+            <th onClick={()=>dispatch(sortbyname())}>Users Names</th>
+            <th onClick={()=>dispatch(sortbysurname())}>Users Websites</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            usersList.map(user => {
+              return <UserItem key={user.userID} {...user} />
+            })
+          }
+        </tbody>
+      </table> : "list empty"}
+
+      <Pagination />
+    </React.Fragment>
   );
 }
 

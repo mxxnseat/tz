@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+}
+table{
+    width: 100%;
+
+    tr{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #cdc;
+    
+        th{
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        td{
+            padding: 10px 0;
+        }
+        td, th{
+            width: 250px;
+            text-align: left;
+        }
+    }
+}
+.pagination{
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    *{
+        cursor: pointer;
+        padding: 9px 15px;
+        border: 3px solid #cdc;
+        border-radius: 6px;
+    }
+    .next{
+        margin-left: 30px;
+    }
+}
+input{
+    margin: 20px 10px;
+    padding: 4px 20px;
+    outline: none;
+    float: right;
+}
